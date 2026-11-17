@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thu Thủy Hotel - Khách sạn & Du lịch</title>
+  <meta name="description" content="Thu Thủy Hotel - Khách sạn nghỉ dưỡng và dịch vụ lữ hành. Đặt phòng, đặt tour, trải nghiệm kỳ nghỉ trọn vẹn.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">Thu Thủy <span>Hotel</span></a>
+      <nav class="nav" id="nav">
+        <a href="#rooms">Phòng nghỉ</a>
+        <a href="#tours">Tour du lịch</a>
+        <a href="#services">Dịch vụ</a>
+        <a href="#about">Giới thiệu</a>
+        <a href="#contact">Liên hệ</a>
+        <a href="#booking" class="btn btn--primary btn--sm">Đặt phòng</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Mở menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__overlay"></div>
+    <div class="container hero__content">
+      <p class="hero__eyebrow">Chào mừng đến với</p>
+      <h1 class="hero__title">Thu Thủy Hotel</h1>
+      <p class="hero__subtitle">Nơi nghỉ dưỡng lý tưởng và những hành trình khám phá đáng nhớ</p>
+      <div class="hero__actions">
+        <a href="#booking" class="btn btn--primary">Đặt phòng ngay</a>
+        <a href="#tours" class="btn btn--outline">Khám phá tour</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick booking bar -->
+  <section class="quick-book">
+    <div class="container">
+      <form class="quick-book__form" id="quickBookForm">
+        <div class="field">
+          <label for="qCheckin">Ngày nhận phòng</label>
+          <input type="date" id="qCheckin" name="checkin" required>
+        </div>
+        <div class="field">
+          <label for="qCheckout">Ngày trả phòng</label>
+          <input type="date" id="qCheckout" name="checkout" required>
+        </div>
+        <div class="field">
+          <label for="qGuests">Số khách</label>
+          <select id="qGuests" name="guests">
+            <option value="1">1 khách</option>
+            <option value="2" selected>2 khách</option>
+            <option value="3">3 khách</option>
+            <option value="4">4 khách</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--primary">Kiểm tra phòng trống</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Rooms -->
+  <section class="section" id="rooms">
+    <div class="container">
+      <div class="section__head">
+        <p class="section__eyebrow">Phòng nghỉ</p>
+        <h2 class="section__title">Không gian nghỉ dưỡng thoải mái</h2>
+        <p class="section__desc">Các hạng phòng được thiết kế tinh tế, đầy đủ tiện nghi, mang đến sự thư giãn trọn vẹn cho kỳ nghỉ của bạn.</p>
+      </div>
+      <div class="grid grid--3" id="roomList">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Tours -->
+  <section class="section section--alt" id="tours">
+    <div class="container">
+      <div class="section__head">
+        <p class="section__eyebrow">Tour du lịch</p>
+        <h2 class="section__title">Hành trình khám phá cùng Thu Thủy</h2>
+        <p class="section__desc">Những tour được thiết kế riêng, kết hợp lưu trú tại khách sạn và trải nghiệm địa phương chân thực.</p>
+      </div>
+      <div class="grid grid--3" id="tourList">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section__head">
+        <p class="section__eyebrow">Dịch vụ</p>
+        <h2 class="section__title">Tiện ích & dịch vụ đi kèm</h2>
+      </div>
+      <div class="grid grid--4 services">
+        <div class="service">
+          <div class="service__icon">🍽️</div>
+          <h3>Nhà hàng</h3>
+          <p>Ẩm thực Việt và quốc tế, phục vụ sáng – trưa – tối với nguyên liệu tươi mỗi ngày.</p>
+        </div>
+        <div class="service">
+          <div class="service__icon">🚗</div>
+          <h3>Đưa đón sân bay</h3>
+          <p>Xe riêng đưa đón tận nơi, hỗ trợ 24/7 theo lịch bay của quý khách.</p>
+        </div>
+        <div class="service">
+          <div class="service__icon">🏊</div>
+          <h3>Hồ bơi & Spa</h3>
+          <p>Hồ bơi ngoài trời, spa thư giãn và phòng gym hiện đại dành cho khách lưu trú.</p>
+        </div>
+        <div class="service">
+          <div class="service__icon">🗺️</div>
+          <h3>Tư vấn lữ hành</h3>
+          <p>Đội ngũ tư vấn thiết kế lịch trình theo yêu cầu, thuê xe, vé tham quan, hướng dẫn viên.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section section--alt" id="about">
+    <div class="container about">
+      <div class="about__media">
+        <div class="about__img"></div>
+      </div>
+      <div class="about__body">
+        <p class="section__eyebrow">Giới thiệu</p>
+        <h2 class="section__title">Về Thu Thủy Hotel</h2>
+        <p>Thu Thủy Hotel là khách sạn nghỉ dưỡng kết hợp dịch vụ lữ hành, mang đến cho du khách sự thuận tiện trọn gói: từ nơi lưu trú ấm cúng đến những chuyến đi được chuẩn bị chu đáo.</p>
+        <p>Chúng tôi tin rằng một kỳ nghỉ đáng nhớ bắt đầu từ sự tận tâm trong từng chi tiết nhỏ – từ nụ cười đón khách đến hành trình khám phá vùng đất mới.</p>
+        <ul class="stats">
+          <li><strong>50+</strong><span>Phòng nghỉ</span></li>
+          <li><strong>20+</strong><span>Tour du lịch</span></li>
+          <li><strong>10.000+</strong><span>Lượt khách hài lòng</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section__head">
+        <p class="section__eyebrow">Đánh giá</p>
+        <h2 class="section__title">Khách hàng nói gì về chúng tôi</h2>
+      </div>
+      <div class="grid grid--3">
+        <blockquote class="review">
+          <p>"Phòng sạch sẽ, nhân viên thân thiện, tour được sắp xếp rất chu đáo. Gia đình tôi sẽ quay lại!"</p>
+          <footer>— Nguyễn Minh Anh, Hà Nội</footer>
+        </blockquote>
+        <blockquote class="review">
+          <p>"Dịch vụ đưa đón đúng giờ, bữa sáng ngon. Vị trí thuận tiện để đi tham quan quanh vùng."</p>
+          <footer>— Trần Quốc Bảo, TP. Hồ Chí Minh</footer>
+        </blockquote>
+        <blockquote class="review">
+          <p>"Tour được thiết kế theo yêu cầu riêng của nhóm, hướng dẫn viên nhiệt tình và am hiểu."</p>
+          <footer>— Lê Thu Hà, Đà Nẵng</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section class="section section--dark" id="booking">
+    <div class="container booking">
+      <div class="booking__intro">
+        <p class="section__eyebrow">Đặt phòng / Đặt tour</p>
+        <h2 class="section__title">Gửi yêu cầu, chúng tôi sẽ liên hệ ngay</h2>
+        <p>Điền thông tin bên dưới, bộ phận đặt phòng sẽ xác nhận trong vòng 30 phút (giờ làm việc).</p>
+      </div>
+      <form class="booking__form" id="bookingForm" novalidate>
+        <div class="field">
+          <label for="bName">Họ và tên</label>
+          <input type="text" id="bName" name="name" required placeholder="Nguyễn Văn A">
+        </div>
+        <div class="field">
+          <label for="bPhone">Số điện thoại</label>
+          <input type="tel" id="bPhone" name="phone" required placeholder="09xx xxx xxx">
+        </div>
+        <div class="field">
+          <label for="bEmail">Email</label>
+          <input type="email" id="bEmail" name="email" placeholder="email@example.com">
+        </div>
+        <div class="field">
+          <label for="bType">Loại yêu cầu</label>
+          <select id="bType" name="type">
+            <option value="room">Đặt phòng</option>
+            <option value="tour">Đặt tour</option>
+            <option value="combo">Combo phòng + tour</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bCheckin">Ngày đến</label>
+          <input type="date" id="bCheckin" name="checkin" required>
+        </div>
+        <div class="field">
+          <label for="bCheckout">Ngày đi</label>
+          <input type="date" id="bCheckout" name="checkout" required>
+        </div>
+        <div class="field field--full">
+          <label for="bNote">Ghi chú</label>
+          <textarea id="bNote" name="note" rows="3" placeholder="Số người, yêu cầu đặc biệt..."></textarea>
+        </div>
+        <div class="field--full">
+          <button type="submit" class="btn btn--primary btn--block">Gửi yêu cầu</button>
+          <p class="form-msg" id="formMsg" role="status"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section__head">
+        <p class="section__eyebrow">Liên hệ</p>
+        <h2 class="section__title">Thông tin liên hệ</h2>
+      </div>
+      <div class="grid grid--3 contact">
+        <div class="contact__item">
+          <h3>Địa chỉ</h3>
+          <p>123 Đường Biển, Phường Trung Tâm<br>Thành phố Du Lịch, Việt Nam</p>
+        </div>
+        <div class="contact__item">
+          <h3>Điện thoại</h3>
+          <p><a href="tel:+84900000000">0900 000 000</a><br>Hotline 24/7</p>
+        </div>
+        <div class="contact__item">
+          <h3>Email</h3>
+          <p><a href="mailto:info@thuthuyhotel.vn">info@thuthuyhotel.vn</a><br>booking@thuthuyhotel.vn</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <a href="#" class="logo logo--light">Thu Thủy <span>Hotel</span></a>
+        <p>Khách sạn & dịch vụ lữ hành</p>
+      </div>
+      <nav class="footer__nav">
+        <a href="#rooms">Phòng nghỉ</a>
+        <a href="#tours">Tour</a>
+        <a href="#services">Dịch vụ</a>
+        <a href="#contact">Liên hệ</a>
+      </nav>
+      <p class="footer__copy">© <span id="year"></span> Thu Thủy Hotel. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
