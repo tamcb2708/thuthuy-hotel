@@ -210,3 +210,8 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; }
   .stats { gap: 20px; }
   .footer__inner { flex-direction: column; text-align: center; }
 }
+
+/* Map */
+.map { margin-top: 36px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.map iframe { width: 100%; height: 380px; border: 0; display: block; }
+.footer__copy a:hover { color: var(--accent); }

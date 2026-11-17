@@ -88,10 +88,36 @@
     document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
   });
 
-  // Booking form (demo: no backend yet)
+  // Booking form: lưu vào Store + gửi email thông báo
   const form = document.getElementById("bookingForm");
   const msg = document.getElementById("formMsg");
-  form?.addEventListener("submit", (e) => {
+  const submitBtn = form?.querySelector('button[type="submit"]');
+
+  async function notifyByEmail(data) {
+    if (!CONFIG.formEmail) return;
+    const typeLabel = { room: "Đặt phòng", tour: "Đặt tour", combo: "Combo phòng + tour" }[data.type] || data.type;
+    const payload = {
+      _subject: `[${CONFIG.hotelName}] ${typeLabel} mới từ ${data.name}`,
+      _template: "table",
+      _captcha: "false",
+      "Mã yêu cầu": data.id,
+      "Loại": typeLabel,
+      "Họ tên": data.name,
+      "Điện thoại": data.phone,
+      "Email": data.email || "-",
+      "Ngày đến": data.checkin,
+      "Ngày đi": data.checkout,
+      "Ghi chú": data.note || "-"
+    };
+    const res = await fetch(`https://formsubmit.co/ajax/${CONFIG.formEmail}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error("Email service " + res.status);
+  }
+
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
     msg.classList.remove("error");
     const data = Object.fromEntries(new FormData(form).entries());
@@ -105,10 +131,28 @@
       msg.classList.add("error");
       return;
     }
-    // TODO: gửi tới backend / email service
-    console.log("Booking request:", data);
-    msg.textContent = `Cảm ơn ${data.name}! Yêu cầu của bạn đã được ghi nhận, chúng tôi sẽ liên hệ sớm.`;
-    form.reset();
+    if (data.checkout <= data.checkin) {
+      msg.textContent = "Ngày đi phải sau ngày đến.";
+      msg.classList.add("error");
+      return;
+    }
+    submitBtn.disabled = true;
+    msg.textContent = "Đang gửi yêu cầu...";
+    try {
+      const saved = await Store.add(data);
+      // Chế độ remote: Apps Script tự gửi email, không cần FormSubmit
+      if (Store.mode() === "local") {
+        try { await notifyByEmail(saved); } catch (err) { console.warn("Không gửi được email:", err); }
+      }
+      msg.textContent = `Cảm ơn ${data.name}! Yêu cầu ${saved.id} đã được ghi nhận, chúng tôi sẽ liên hệ sớm.`;
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      msg.textContent = "Có lỗi khi gửi yêu cầu. Vui lòng gọi hotline hoặc thử lại sau.";
+      msg.classList.add("error");
+    } finally {
+      submitBtn.disabled = false;
+    }
   });
 
   // Footer year

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản trị - Thu Thủy Hotel</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Đăng nhập -->
+  <div class="login" id="loginView">
+    <form class="login__box" id="loginForm">
+      <h1>Thu Thủy <span>Hotel</span></h1>
+      <p>Trang quản trị</p>
+      <label for="password">Mật khẩu</label>
+      <input type="password" id="password" autocomplete="current-password" required autofocus>
+      <button type="submit" class="btn btn--primary">Đăng nhập</button>
+      <p class="login__err" id="loginErr"></p>
+    </form>
+  </div>
+
+  <!-- Ứng dụng -->
+  <div class="app" id="appView" hidden>
+    <aside class="sidebar">
+      <div class="sidebar__brand">Thu Thủy <span>Hotel</span></div>
+      <nav class="sidebar__nav">
+        <a href="#overview" data-view="overview" class="active">📊 Tổng quan</a>
+        <a href="#bookings" data-view="bookings">📋 Đặt phòng / tour <span class="pill" id="newCount">0</span></a>
+        <a href="#catalog" data-view="catalog">🏨 Phòng & Tour</a>
+        <a href="#settings" data-view="settings">⚙️ Cài đặt</a>
+      </nav>
+      <div class="sidebar__foot">
+        <a href="../" target="_blank">↗ Xem trang web</a>
+        <button id="logoutBtn" class="link">Đăng xuất</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="notice" id="modeNotice"></div>
+
+      <!-- Tổng quan -->
+      <section class="view" id="view-overview">
+        <h2>Tổng quan</h2>
+        <div class="stats">
+          <div class="stat"><span class="stat__label">Yêu cầu mới</span><strong id="stNew">0</strong></div>
+          <div class="stat"><span class="stat__label">Đã xác nhận</span><strong id="stConfirmed">0</strong></div>
+          <div class="stat"><span class="stat__label">Trong 30 ngày</span><strong id="stMonth">0</strong></div>
+          <div class="stat"><span class="stat__label">Tổng yêu cầu</span><strong id="stTotal">0</strong></div>
+        </div>
+        <div class="card">
+          <div class="card__head"><h3>Yêu cầu gần đây</h3><a href="#bookings" data-view="bookings">Xem tất cả →</a></div>
+          <div class="table-wrap"><table class="table" id="recentTable"></table></div>
+        </div>
+      </section>
+
+      <!-- Đặt phòng -->
+      <section class="view" id="view-bookings" hidden>
+        <div class="view__head">
+          <h2>Đặt phòng / tour</h2>
+          <div class="toolbar">
+            <input type="search" id="search" placeholder="Tìm tên, SĐT, mã...">
+            <select id="filterStatus">
+              <option value="">Mọi trạng thái</option>
+              <option value="new">Mới</option>
+              <option value="confirmed">Đã xác nhận</option>
+              <option value="done">Hoàn thành</option>
+              <option value="cancelled">Đã huỷ</option>
+            </select>
+            <select id="filterType">
+              <option value="">Mọi loại</option>
+              <option value="room">Đặt phòng</option>
+              <option value="tour">Đặt tour</option>
+              <option value="combo">Combo</option>
+            </select>
+            <button class="btn btn--ghost" id="refreshBtn">↻ Tải lại</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="table-wrap"><table class="table" id="bookingTable"></table></div>
+          <p class="empty" id="bookingEmpty" hidden>Chưa có yêu cầu nào.</p>
+        </div>
+      </section>
+
+      <!-- Phòng & Tour -->
+      <section class="view" id="view-catalog" hidden>
+        <div class="view__head">
+          <h2>Phòng & Tour</h2>
+          <div class="toolbar">
+            <button class="btn btn--ghost" id="resetCatalogBtn">Khôi phục mặc định</button>
+            <button class="btn btn--primary" id="exportCatalogBtn">⬇ Tải data.js</button>
+          </div>
+        </div>
+        <p class="hint">Chỉnh sửa rồi bấm <b>Tải data.js</b>, thay file <code>js/data.js</code> trong repo để cập nhật trang web công khai.</p>
+        <div class="card"><h3>Phòng nghỉ</h3><div class="catalog" id="roomCatalog"></div></div>
+        <div class="card"><h3>Tour du lịch</h3><div class="catalog" id="tourCatalog"></div></div>
+      </section>
+
+      <!-- Cài đặt -->
+      <section class="view" id="view-settings" hidden>
+        <h2>Cài đặt</h2>
+        <div class="card">
+          <h3>Kết nối dữ liệu</h3>
+          <p id="settingsMode"></p>
+          <p class="hint">Để nhiều người cùng xem đặt phòng trên nhiều máy, triển khai Google Apps Script theo hướng dẫn trong <code>backend/README.md</code> rồi điền <code>apiEndpoint</code> vào <code>js/config.js</code>.</p>
+        </div>
+        <div class="card">
+          <h3>Email thông báo</h3>
+          <p>Mỗi yêu cầu mới sẽ gửi email tới <b id="settingsEmail"></b>.</p>
+          <p class="hint">Lần đầu tiên, FormSubmit gửi email "Activate form" tới địa chỉ trên. Bấm nút kích hoạt trong email đó một lần duy nhất.</p>
+        </div>
+        <div class="card">
+          <h3>Đổi mật khẩu quản trị</h3>
+          <div class="row">
+            <input type="password" id="newPass" placeholder="Mật khẩu mới">
+            <button class="btn btn--ghost" id="hashBtn">Tạo mã mật khẩu</button>
+          </div>
+          <textarea id="hashOut" rows="2" readonly placeholder="Mã băm sẽ hiện ở đây"></textarea>
+          <p class="hint">Dán mã vào <code>adminPasswordHash</code> trong <code>js/config.js</code> và push lên GitHub.</p>
+        </div>
+        <div class="card" id="localTools">
+          <h3>Sao lưu dữ liệu (chế độ trình duyệt)</h3>
+          <div class="row">
+            <button class="btn btn--ghost" id="exportBtn">⬇ Xuất JSON</button>
+            <label class="btn btn--ghost">⬆ Nhập JSON <input type="file" id="importFile" accept="application/json" hidden></label>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal chi tiết -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__box">
+      <div class="modal__head"><h3 id="mTitle">Chi tiết</h3><button class="link" id="mClose">✕</button></div>
+      <div class="modal__body" id="mBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/store.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
